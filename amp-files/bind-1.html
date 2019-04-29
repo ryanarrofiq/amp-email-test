@@ -1,0 +1,32 @@
+<!doctype html>
+<html ⚡4email>
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+  <style amp4email-boilerplate>body{visibility:hidden}</style>
+  <style amp-custom>
+    .red { background-color: red; }
+    .blue { background-color: blue; }
+    .yellow { background-color: yellow; }
+  </style>
+</head>
+<body>
+  <amp-state id="state">
+  <script type="application/json">
+    {
+      "color": "yellow"
+    }
+  </script>
+  </amp-state>
+  <p [class]="state.color" class="yellow" [text]="'The current color is ' + state.color + '.'">
+    The current color is yellow.
+  </p>
+  <button on="tap:AMP.setState({state: {color: 'red'}})">
+    Set color to red
+  </button>
+  <button on="tap:AMP.setState({state: {color: 'blue'}})">
+    Set color to blue
+  </button>
+</body>
+</html>

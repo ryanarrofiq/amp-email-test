@@ -3,14 +3,13 @@ const fs = require('fs');
 const config = require('./config');
 const mailer = require('./mailer');
 
-const sendPromotionalEmail = function(receiver) {
+const sendPromotionalEmail = function(receiver, ampFile) {
   // edit config.js for your gmail credentials
   const gmailAccount = config.gmailAccount;
 
   const params = {
     to: [receiver], // list of receivers
-    subject: 'SaathMeTravel: An open source social travelling app to match'
-      + ' the travellers sharing a common journey.',
+    subject: 'Test AMP Email ' + Math.random().toString(36).substr(2, 9),
     text: 'This is a dynamic email but your email client does not support it',
     html: `
       <p>This is a dynamic email.</p>
@@ -25,7 +24,7 @@ const sendPromotionalEmail = function(receiver) {
   };
 
   // read the dynamic-email html file
-  fs.readFile('./index.html', function(error, data) {
+  fs.readFile(ampFile, function(error, data) {
     if (error) {
       console.trace(error);
     } else {
@@ -40,11 +39,35 @@ const sendPromotionalEmail = function(receiver) {
   });
 };
 
-const stdin = process.openStdin();
+const getAmpFile = (value) => {
+  let ampFile = ''
 
-console.log('Sending dynamic email using amp4email-');
-console.log("Enter receiver's email");
-stdin.addListener('data', function(data) {
-  const receiverEmail = data.toString().trim();
-  sendPromotionalEmail(receiverEmail);
-});
+  if (value === '1') ampFile = 'index'
+  else if (value === '2') ampFile = 'accordion'
+  else if (value === '3') ampFile = 'anim'
+  else if (value === '4') ampFile = 'bind-1'
+  else if (value === '5') ampFile = 'bind-2'
+  else if (value === '6') ampFile = 'carousel-1'
+  else if (value === '7') ampFile = 'carousel-2'
+  else if (value === '8') ampFile = 'fit-text'
+  else if (value === '9') ampFile = 'form'
+  else if (value === '10') ampFile = 'list-1'
+  else if (value === '11') ampFile = 'list-2'
+  else if (value === '12') ampFile = 'timeago'
+  else ampFile = 'index'
+
+  return `./amp-files/${ampFile}.html`
+}
+
+const stdin = process.openStdin();
+const inputReceiver = (choice) => {
+  console.log('Sending dynamic email using amp4email-');
+  console.log("Enter receiver's email");
+  stdin.addListener('data', function(data) {
+    const receiverEmail = data.toString().trim();
+    const selectedAmp = (choice) ? getAmpFile(choice.toString().trim()) : getAmpFile('0')
+    sendPromotionalEmail(receiverEmail, selectedAmp)
+  })
+}
+
+inputReceiver()

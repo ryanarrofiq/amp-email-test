@@ -1,0 +1,83 @@
+<!doctype html>
+<html ⚡4email>
+
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-fit-text" src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"></script>
+  <style amp4email-boilerplate>body{visibility:hidden}</style>
+  <style amp-custom>
+    .section {
+      margin: 10px;
+      padding: 5px;
+      border: solid 1px gray;
+    }
+
+    .desc {
+      color: white;
+      background-color: #222;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <p>
+    In each of these examples, the &lt;amp-fit-text&gt; element is nested in a 200x200 grey div block to demonstrate
+    differences in attributes and layout values.</p>
+
+  <p>
+    When &lt;amp-fit-text&gt; is used with a given height, width, and layout="responsive" attribute, the text will
+    scale
+    responsively in the ratio provided but not exceed the size of its parent.
+  </p>
+
+  <div class="section">
+    <p class="desc">Aspect ratio: 1.5:1 (3:2)<p>
+
+        <div class="fixedblock">
+          <amp-fit-text width="300" height="200" layout="responsive">Lorem ipsum dolor sit amet, has nisl nihil
+            convenire
+            et, vim at aeque inermis reprehendunt.</amp-fit-text>
+        </div>
+  </div>
+  <div class="section">
+    <p class="desc">Aspect ratio: 1:1</p>
+    <div class="fixedblock">
+      <amp-fit-text width="200" height="200" layout="responsive">Lorem ipsum dolor sit amet, has nisl nihil convenire
+        et, vim at aeque inermis reprehendunt.</amp-fit-text>
+    </div>
+  </div>
+  <div class="section">
+    <p class="desc">The min-font-size attribute dictates a minimum size for the text. In this case, we've dictated a
+      minimum of
+      30, which will cause it to exceed the size of its fixed block parent and be truncated to fit as appropriate.</p>
+    <div class="fixedblock">
+      <amp-fit-text width="300" height="200" layout="responsive" min-font-size="30">Lorem ipsum dolor sit amet, has
+        nisl nihil convenire et, vim at aeque inermis reprehendunt.</amp-fit-text>
+    </div>
+  </div>
+  <div class="section">
+    <p class="desc">
+      The max-font-size attribute dictates a maximum size for the text. In this case, we've dictated a maximum of 10,
+      ensuring it won't fill the size of its parent element.
+    </p>
+    <div class="fixedblock">
+      <amp-fit-text width="300" height="200" layout="responsive" max-font-size="10">Lorem ipsum dolor sit amet, has
+        nisl nihil convenire et, vim at aeque inermis reprehendunt.</amp-fit-text>
+    </div>
+  </div>
+  <div class="section">
+    <p class="desc">
+      When &lt;amp-fit-text&gt; is used with a given height and layout="fixed-height" attribute, it will fit to the
+      size of
+      its given height (200), and adjust the width as needed to stay within the bounds of its parent container.
+    </p>
+    <div class="fixedblock">
+      <amp-fit-text height="200" layout="fixed-height">Lorem ipsum dolor sit amet, has nisl nihil convenire et, vim
+        at aeque inermis reprehendunt.</amp-fit-text>
+    </div>
+  </div>
+</body>
+
+</html>
